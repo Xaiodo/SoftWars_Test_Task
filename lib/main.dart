@@ -1,8 +1,13 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:softwars_test_task/cubit/tasks_cubit.dart';
+import 'package:softwars_test_task/repositories/tasks_repository.dart';
+import 'package:softwars_test_task/services/tasks_service.dart';
 import 'screens/adding_screen.dart';
 import 'screens/home_screen.dart';
 import 'screens/login_screen.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'screens/editing_screen.dart';
 
@@ -44,9 +49,14 @@ class MyApp extends StatelessWidget {
   );
 
   @override
-  Widget build(BuildContext context) => MaterialApp.router(
-        routerDelegate: router.routerDelegate,
-        routeInformationParser: router.routeInformationParser,
-        routeInformationProvider: router.routeInformationProvider,
+  Widget build(BuildContext context) => BlocProvider(
+        create: (context) => TasksCubit(
+          repository: TasksRepository(tasksService: TasksService(dio: Dio())),
+        ),
+        child: MaterialApp.router(
+          routerDelegate: router.routerDelegate,
+          routeInformationParser: router.routeInformationParser,
+          routeInformationProvider: router.routeInformationProvider,
+        ),
       );
 }
