@@ -33,6 +33,7 @@ const textTheme = TextTheme(
   bodySmall: TextStyle(
     fontSize: 11,
     fontWeight: FontWeight.w600,
+    color: Colors.black,
   ),
 );
 
