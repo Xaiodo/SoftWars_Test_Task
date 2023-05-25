@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:softwars_test_task/cubit/tasks_cubit.dart';
-import 'package:softwars_test_task/widgets/filter_button.dart';
+import '../cubits/tasks/tasks_cubit.dart';
+import '../widgets/filter_button.dart';
 
-class FilterButtons extends StatelessWidget {
-  const FilterButtons({super.key});
+class TabButtons extends StatelessWidget {
+  const TabButtons({super.key});
 
   @override
   Widget build(BuildContext context) => Padding(

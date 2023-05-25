@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import '../cubit/tasks_cubit.dart';
+import '../cubits/tasks/tasks_cubit.dart';
 import '../widgets/todo_item.dart';
 import '../values/app_colors.dart';
 import '../widgets/tab_buttons.dart';
@@ -25,26 +25,32 @@ class HomeScreen extends StatelessWidget {
             ),
             child: Column(
               children: [
-                const FilterButtons(),
+                const TabButtons(),
                 const SizedBox(
                   height: 20,
                 ),
                 Expanded(
                   child: BlocBuilder<TasksCubit, TasksState>(
-                    builder: (context, state) => ListView.separated(
-                      padding: EdgeInsets.zero,
-                      itemCount: state.tasks.length,
-                      itemBuilder: (context, index) => TodoItem(
-                        status: state.tasks[index].status,
-                        type: state.tasks[index].type,
-                        urgent: state.tasks[index].urgent,
-                        name: state.tasks[index].name,
-                        date: state.tasks[index].finishDate,
-                      ),
-                      separatorBuilder: (context, index) => const SizedBox(
-                        height: 5,
-                      ),
-                    ),
+                    builder: (context, state) {
+                      if (state ==
+                          TasksLoaded(
+                            tasks: state.tasks,
+                            filter: state.filter,
+                          )) {
+                        return ListView.builder(
+                          physics: const BouncingScrollPhysics(),
+                          padding: EdgeInsets.zero,
+                          itemCount: state.tasks.length,
+                          shrinkWrap: true,
+                          itemBuilder: (context, index) => TodoItem(
+                            task: state.tasks[index],
+                          ),
+                        );
+                      }
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    },
                   ),
                 ),
               ],
@@ -52,14 +58,14 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
         floatingActionButton: GestureDetector(
-          onTap: () => context.go('/adding'),
+          onTap: () => context.push('/adding'),
           child: Container(
             decoration: BoxDecoration(
               color: AppColors.primaryVariant,
               borderRadius: BorderRadius.circular(25),
             ),
-            height: 71,
-            width: 71,
+            height: 65,
+            width: 65,
             child: const Icon(
               Icons.add,
               color: AppColors.secondary,

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:softwars_test_task/cubit/tasks_cubit.dart';
+import '../cubits/tasks/tasks_cubit.dart';
 
 import '../values/app_colors.dart';
 

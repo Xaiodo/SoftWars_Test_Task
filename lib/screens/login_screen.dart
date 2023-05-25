@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../values/app_colors.dart';
-import '../widgets/eleveted_button.dart';
+import '../widgets/elevated_button.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
