@@ -19,4 +19,28 @@ class TasksService {
       rethrow;
     }
   }
+
+  Future<void> createTask(Task task) async {
+    try {
+      print(task.toJson());
+    } on DioError {
+      rethrow;
+    }
+  }
+
+  Future<void> updateTask(Task task) async {
+    try {
+      print(task.toJson());
+    } on DioError {
+      rethrow;
+    }
+  }
+
+  Future<void> deleteTask(Task task) async {
+    try {
+      print(task.toJson());
+    } on DioError {
+      rethrow;
+    }
+  }
 }
