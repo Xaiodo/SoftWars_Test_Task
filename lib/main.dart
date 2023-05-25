@@ -1,9 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:softwars_test_task/cubit/tasks_cubit.dart';
-import 'package:softwars_test_task/repositories/tasks_repository.dart';
-import 'package:softwars_test_task/services/tasks_service.dart';
+import 'package:softwars_test_task/models/task.dart';
+import './cubits/tasks/tasks_cubit.dart';
+import '../repositories/tasks_repository.dart';
+import '../services/tasks_service.dart';
 import 'screens/adding_screen.dart';
 import 'screens/home_screen.dart';
 import 'screens/login_screen.dart';
@@ -34,8 +35,9 @@ class MyApp extends StatelessWidget {
       ),
       GoRoute(
         path: '/editing',
-        pageBuilder: (context, state) => const MaterialPage(
-          child: EditingScreen(),
+        pageBuilder: (context, state) => MaterialPage(
+          key: const ValueKey('editing'),
+          child: EditingScreen(task: state.extra as Task),
         ),
       ),
       GoRoute(
@@ -49,10 +51,18 @@ class MyApp extends StatelessWidget {
   );
 
   @override
-  Widget build(BuildContext context) => BlocProvider(
-        create: (context) => TasksCubit(
-          repository: TasksRepository(tasksService: TasksService(dio: Dio())),
-        ),
+  Widget build(BuildContext context) => MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => TasksCubit(
+              repository: TasksRepository(
+                tasksService: TasksService(
+                  dio: Dio(),
+                ),
+              ),
+            ),
+          ),
+        ],
         child: MaterialApp.router(
           routerDelegate: router.routerDelegate,
           routeInformationParser: router.routeInformationParser,
