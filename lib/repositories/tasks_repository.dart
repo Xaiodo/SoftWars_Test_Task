@@ -1,4 +1,4 @@
-import 'package:softwars_test_task/cubit/tasks_cubit.dart';
+import '../cubits/tasks/tasks_cubit.dart';
 
 import '../models/task.dart';
 import '../services/tasks_service.dart';
@@ -31,35 +31,27 @@ class TasksRepository {
     }
   }
 
-  // Future<void> updateTask(Task task) async {
-  //   try {
-  //     await _tasksService.updateTask(task);
-  //   } catch (e) {
-  //     rethrow;
-  //   }
-  // }
+  Future<void> updateTask(Task task) async {
+    try {
+      await _tasksService.updateTask(task);
+    } catch (e) {
+      rethrow;
+    }
+  }
 
-  // // Future<void> deleteTask(Task task) async {
-  // //   try {
-  // //     await _tasksService.deleteTask(task);
-  // //   } catch (e) {
-  // //     rethrow;
-  // //   }
-  // // }
+  Future<void> deleteTask(Task task) async {
+    try {
+      await _tasksService.deleteTask(task);
+    } catch (e) {
+      rethrow;
+    }
+  }
 
-  // // Future<void> createTask(Task task) async {
-  // //   try {
-  // //     await _tasksService.createTask(task);
-  // //   } catch (e) {
-  // //     rethrow;
-  // //   }
-  // // }
-
-  // // Future<void> syncTasks(List<Task> tasks) async {
-  // //   try {
-  // //     await _tasksService.syncTasks(tasks);
-  // //   } catch (e) {
-  // //     rethrow;
-  // //   }
-  // // }
+  Future<void> createTask(Task task) async {
+    try {
+      await _tasksService.createTask(task);
+    } catch (e) {
+      rethrow;
+    }
+  }
 }
