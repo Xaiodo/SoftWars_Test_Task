@@ -7,7 +7,7 @@ abstract class TasksState extends Equatable {
   final List<Task> tasks;
   final TasksFilter filter;
 
-  const TasksState({
+  TasksState({
     required this.tasks,
     this.filter = TasksFilter.all,
   });
@@ -21,13 +21,19 @@ abstract class TasksState extends Equatable {
 }
 
 class TasksInitial extends TasksState {
-  const TasksInitial({super.tasks = const []});
+  TasksInitial({
+    super.tasks = const [],
+    super.filter = TasksFilter.all,
+  });
 }
 
 class TasksLoaded extends TasksState {
-  const TasksLoaded({required super.tasks, required super.filter});
+  TasksLoaded({
+    required super.tasks,
+    required super.filter,
+  });
 }
 
 class TasksLoading extends TasksState {
-  const TasksLoading({required super.tasks});
+  TasksLoading({required super.tasks});
 }
